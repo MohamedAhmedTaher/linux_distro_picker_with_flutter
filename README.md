@@ -1,17 +1,50 @@
-# linux_distro_picker
+# 🐧 Distro Finder — Flutter Quiz App (v2)
 
-A flutter app that helps you pick the right distro for YOU.
+A terminal-aesthetic Flutter quiz app that recommends a Linux distro based on your preferences.
 
-## Getting Started
+## Project Structure
 
-This project is a starting point for a Flutter application.
+```
+lib/
+├── main.dart                    ← App root + ScreenUtil + theme wiring
+│
+├── logic/
+│   ├── models.dart              ← QuizQuestion, HistoryEntry
+│   ├── quiz_data.dart           ← Questions, distro names/emojis/colors/descriptions, score matrix
+│   └── quiz_engine.dart         ← recommend() scorer + lightTheme() / darkTheme() builders
+│
+├── screens/
+│   ├── quiz_shell.dart          ← Scaffold + AppBar + AnimatedSwitcher + all state
+│   ├── welcome_screen.dart      ← Landing / intro screen
+│   ├── question_screen.dart     ← Single question view
+│   └── result_screen.dart       ← Recommendation result view
+│
+└── widgets/
+    ├── shared_widgets.dart      ← ChoiceCard, TerminalLine, ProgressDots
+    └── history_drawer.dart      ← Drawer + HistoryTile
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- **5-question quiz** — terminal comfort, use case, tweaking, release model, desktop vibe
+- **8 distros** — Ubuntu, Fedora, Arch, Debian, Pop!\_OS, Manjaro, Linux Mint, NixOS
+- **Light / Dark mode** toggle in AppBar
+- **History drawer** with relative timestamps
+- **Responsive** via `flutter_screenutil` (design baseline 360×800)
+- **No router, no state-management package** — plain `StatefulWidget` + `setState`
+- **No deprecated APIs** — uses `Color.withValues(alpha:)` instead of `withOpacity`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Setup
+
+```bash
+flutter pub get
+flutter run
+```
+
+## Customisation
+
+| File | What to change |
+|---|---|
+| `logic/quiz_data.dart` | Add/edit questions, distros, score weights |
+| `logic/quiz_engine.dart` | Tweak theme colours |
+| `widgets/shared_widgets.dart` | Reskin ChoiceCard / ProgressDots |
